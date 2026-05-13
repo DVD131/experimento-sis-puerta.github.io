@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sistema de Control de Asistencia</title>
+  <link rel="stylesheet" href="CSS/style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header class="header">
+    <div class="header-inner">
+      <div class="header-logo">
+        <span class="logo-icon">🎓</span>
+        <div>
+          <h1 class="header-title">Control de Asistencia</h1>
+          <p class="header-subtitle">Sistema Escolar de Registro</p>
+        </div>
+      </div>
+      <div class="header-date" id="headerDate"></div>
+    </div>
+  </header>
+
+  <!-- SEARCH BAR -->
+  <div class="search-section">
+    <div class="search-wrapper">
+      <span class="search-icon">🔍</span>
+      <input type="text" id="searchInput" class="search-input" placeholder="Buscar alumno por nombre, apellido o grupo...">
+      <button class="search-clear" id="searchClear" onclick="clearSearch()">✕</button>
+    </div>
+  </div>
+
+  <!-- NAVIGATION BUTTONS -->
+  <nav class="nav-buttons">
+    <button class="nav-btn btn-gray" onclick="showPanel('sinCredencial')">
+      <span class="btn-icon">🪪</span> Sin Credencial
+    </button>
+    <button class="nav-btn btn-gray" onclick="showPanel('sinUniforme')">
+      <span class="btn-icon">👕</span> Sin Uniforme
+    </button>
+    <button class="nav-btn btn-gray" onclick="showPanel('enPlantel')">
+      <span class="btn-icon">🏫</span> Alumnos en la Institución
+    </button>
+    <button class="nav-btn btn-gray" onclick="showPanel('todosRegistrados')">
+      <span class="btn-icon">📋</span> Todos los Alumnos
+    </button>
+    <button class="nav-btn btn-gray" onclick="showPanel('registrar')">
+      <span class="btn-icon">✏️</span> Registrar Alumnos
+    </button>
+    <button class="nav-btn btn-gray" onclick="showPanel('noRegistrados')">
+      <span class="btn-icon">⏳</span> Aún No Registrados
+    </button>
+    <button class="nav-btn btn-gray" onclick="showPanel('faltantes')">
+      <span class="btn-icon">❌</span> Alumnos Faltantes
+    </button>
+    <button class="nav-btn btn-gray" onclick="mostrarFormularioAlumno()">
+      <span class="btn-icon">➕</span> Agregar Alumno
+    </button>
+    <button class="nav-btn btn-download" onclick="exportarExcel()">
+      <span class="btn-icon">📥</span> Descargar Excel
+    </button>
+  </nav>
+
+  <!-- MAIN PANEL -->
+  <main class="main-container">
+    <section class="content-panel" id="contentPanel">
+      <div class="panel-header">
+        <h2 class="panel-title" id="panelTitle">Bienvenido al Sistema</h2>
+        <span class="panel-count" id="panelCount"></span>
+      </div>
+      <div class="panel-body" id="panelBody">
+        <div class="welcome-screen">
+          <div class="welcome-icon">🎓</div>
+          <h3>Sistema de Control de Asistencia</h3>
+          <p>Selecciona una opción del menú para comenzar.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- MODAL HISTORIAL -->
+  <div class="modal-overlay" id="modalHistorial" onclick="closeModal()">
+    <div class="modal-box" onclick="event.stopPropagation()">
+      <div class="modal-header">
+        <h3 id="modalTitle">Historial del Alumno</h3>
+        <button class="modal-close" onclick="closeModal()">✕</button>
+      </div>
+      <div class="modal-body" id="modalBody"></div>
+    </div>
+  </div>
+
+  <!-- MODAL AGREGAR ALUMNO -->
+  <div class="modal-overlay" id="modalAlumno" onclick="cerrarModalAlumno()">
+    <div class="modal-box" onclick="event.stopPropagation()">
+      <div class="modal-header">
+        <h3>➕ Agregar Nuevo Alumno</h3>
+        <button class="modal-close" onclick="cerrarModalAlumno()">✕</button>
+      </div>
+
+      <div class="modal-body">
+        <input type="text" id="nuevoNombre" placeholder="Nombre completo"
+          style="width:100%;padding:10px;margin-bottom:10px;">
+
+        <input type="text" id="nuevoCurp" placeholder="CURP"
+          style="width:100%;padding:10px;margin-bottom:10px;">
+
+        <input type="text" id="nuevoControl" placeholder="Número de control"
+          style="width:100%;padding:10px;margin-bottom:10px;">
+
+        <button class="btn-save" onclick="guardarNuevoAlumno()">
+          💾 Guardar Alumno
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <script src="JS/data.js"></script>
+  <script src="JS/app.js"></script>
+</body>
+</html>
