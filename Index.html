@@ -691,8 +691,148 @@
       .panel-body { padding: 16px; }
       .register-card { flex-direction: column; align-items: flex-start; }
     }
+    /* ========== PERFIL / MÁS INFO ========== */
+    .info-perfil-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-bottom: 18px;
+    }
+    @media (max-width: 520px) { .info-perfil-grid { grid-template-columns: 1fr; } }
+    
+    .info-dato {
+      background: #F5F7FA;
+      border-radius: var(--radio-sm);
+      padding: 10px 14px;
+      border-left: 3px solid var(--azul-claro);
+    }
+    .info-label {
+      display: block;
+      font-size: 0.72rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.4px;
+      color: var(--gris-oscuro);
+      margin-bottom: 3px;
+    }
+    .info-valor {
+      font-size: 0.95rem;
+      font-weight: 800;
+      color: #1A237E;
+    }
+    
+    .info-stats-row {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 4px;
+      flex-wrap: wrap;
+    }
+    .info-stat {
+      flex: 1;
+      min-width: 70px;
+      border-radius: var(--radio-sm);
+      padding: 12px 10px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+    .info-stat-num { font-size: 1.6rem; font-weight: 800; line-height: 1; }
+    .info-stat-lbl { font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.3px; }
+    .info-stat-ok      { background: #E8F5E9; color: #2E7D32; }
+    .info-stat-warn    { background: #FFF9C4; color: #F57F17; }
+    .info-stat-danger  { background: #FFEBEE; color: #C62828; }
+    .info-stat-neutral { background: #E3F2FD; color: #1565C0; }
+    
+    /* ========== FORMULARIO AGREGAR ALUMNO ========== */
+    .form-alumno-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-bottom: 8px;
+    }
+    @media (max-width: 520px) { .form-alumno-grid { grid-template-columns: 1fr; } }
+    
+    .form-field { display: flex; flex-direction: column; gap: 5px; }
+    .form-field-full { grid-column: 1 / -1; }
+    
+    .form-label {
+      font-size: 0.78rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.4px;
+      color: var(--gris-oscuro);
+    }
+    .form-input {
+      padding: 10px 14px;
+      border-radius: var(--radio-sm);
+      border: 2px solid var(--gris-medio);
+      font-family: 'Nunito', sans-serif;
+      font-size: 0.93rem;
+      color: #263238;
+      outline: none;
+      transition: border-color 0.2s, box-shadow 0.2s;
+      background: #FAFAFA;
+    }
+    .form-input:focus {
+      border-color: var(--azul-claro);
+      box-shadow: 0 0 0 3px rgba(66,165,245,0.15);
+      background: #fff;
+    }
+    
+    .btn-save-full {
+      width: 100%;
+      padding: 12px;
+      font-size: 0.95rem;
+      border-radius: var(--radio);
+      display: block;
+      text-align: center;
+      margin-top: 4px;
+    }
+    
+    /* Botón Más info */
+    .btn-mas-info {
+      background: #E3F2FD;
+      color: #1565C0;
+      border: 2px solid #90CAF9;
+      padding: 8px 14px;
+      border-radius: var(--radio-sm);
+      font-family: 'Nunito', sans-serif;
+      font-weight: 700;
+      font-size: 0.8rem;
+      cursor: pointer;
+      transition: all 0.2s;
+      white-space: nowrap;
+    }
+    .btn-mas-info:hover {
+      background: #1565C0;
+      color: #fff;
+      border-color: #1565C0;
+      transform: scale(1.04);
+    }
+    
+    /* Botón Eliminar */
+    .btn-eliminar {
+      background: #FFEBEE;
+      color: #C62828;
+      border: 2px solid #EF9A9A;
+      padding: 8px 14px;
+      border-radius: var(--radio-sm);
+      font-family: 'Nunito', sans-serif;
+      font-weight: 700;
+      font-size: 0.8rem;
+      cursor: pointer;
+      transition: all 0.2s;
+      white-space: nowrap;
+    }
+    .btn-eliminar:hover {
+      background: #C62828;
+      color: #fff;
+      border-color: #C62828;
+      transform: scale(1.04);
+    }
   </style>
-<body>
+  <body>
 
   <!-- HEADER -->
   <header class="header">
@@ -785,189 +925,41 @@
       </div>
 
       <div class="modal-body">
-        <input type="text" id="nuevoNombre" placeholder="Nombre completo"
-          style="width:100%;padding:10px;margin-bottom:10px;">
-
-        <input type="text" id="nuevoCurp" placeholder="CURP"
-          style="width:100%;padding:10px;margin-bottom:10px;">
-
-        <input type="text" id="nuevoControl" placeholder="Número de control"
-          style="width:100%;padding:10px;margin-bottom:10px;">
-
-        <button class="btn-save" onclick="guardarNuevoAlumno()">
+        <div class="form-alumno-grid">
+          <div class="form-field">
+            <label class="form-label">Apellido Paterno *</label>
+            <input type="text" id="nuevoApPaterno" class="form-input" placeholder="Ej. García">
+          </div>
+          <div class="form-field">
+            <label class="form-label">Apellido Materno *</label>
+            <input type="text" id="nuevoApMaterno" class="form-input" placeholder="Ej. López">
+          </div>
+          <div class="form-field">
+            <label class="form-label">Nombre(s) *</label>
+            <input type="text" id="nuevoNombre" class="form-input" placeholder="Ej. Carlos Andrés">
+          </div>
+          <div class="form-field">
+            <label class="form-label">Grupo</label>
+            <input type="text" id="nuevoGrupo" class="form-input" placeholder="Ej. 3D1">
+          </div>
+          <div class="form-field form-field-full">
+            <label class="form-label">CURP</label>
+            <input type="text" id="nuevoCurp" class="form-input" placeholder="Ej. GARL050312HMCXXX00" maxlength="18" style="text-transform:uppercase">
+          </div>
+          <div class="form-field form-field-full">
+            <label class="form-label">Número de Control</label>
+            <input type="text" id="nuevoControl" class="form-input" placeholder="Ej. 2024-001">
+          </div>
+        </div>
+        <p style="font-size:0.78rem;color:#90A4AE;margin-bottom:16px;">* Campos obligatorios</p>
+        <button class="btn-save btn-save-full" onclick="guardarNuevoAlumno()">
           💾 Guardar Alumno
         </button>
       </div>
     </div>
   </div>
-
+    
   <script>
-    // ============================================================
-    // DATA.JS — Base de datos de alumnos y asistencias
-    // ============================================================
-    
-    // Fecha actual para registros del día
-    const HOY = new Date().toLocaleDateString('es-MX', { day: '2-digit', month: '2-digit', year: 'numeric' });
-    
-    // ---- CATÁLOGO DE ALUMNOS ----
-    // Formato: { id, apPaterno, apMaterno, nombre, grupo }
-    // Grupos: 6A2, 6A1, 5B2, 5B1, 4C2, 4C1, 3D2, 3D1, 2E2, 2E1, 1F2, 1F1
-    const ALUMNOS_BASE = [
-      { id: 1,  apPaterno: "Alvarado",    apMaterno: "Benítez",   nombre: "Carlos",    grupo: "6A2" },
-      { id: 2,  apPaterno: "Bernal",      apMaterno: "Cruz",      nombre: "Sofía",     grupo: "6A1" },
-      { id: 3,  apPaterno: "Campos",      apMaterno: "Díaz",      nombre: "Andrés",    grupo: "5B2" },
-      { id: 4,  apPaterno: "Domínguez",   apMaterno: "Espinosa",  nombre: "Valeria",   grupo: "5B1" },
-      { id: 5,  apPaterno: "Estrada",     apMaterno: "Flores",    nombre: "Miguel",    grupo: "4C2" },
-      { id: 6,  apPaterno: "Fuentes",     apMaterno: "García",    nombre: "Daniela",   grupo: "4C1" },
-      { id: 7,  apPaterno: "García",      apMaterno: "Hernández", nombre: "Luis",      grupo: "3D2" },
-      { id: 8,  apPaterno: "Hernández",   apMaterno: "Jiménez",   nombre: "Mariana",   grupo: "3D1" },
-      { id: 9,  apPaterno: "Ibarra",      apMaterno: "López",     nombre: "Rodrigo",   grupo: "2E2" },
-      { id: 10, apPaterno: "Jiménez",     apMaterno: "Martínez",  nombre: "Ana",       grupo: "2E1" },
-      { id: 11, apPaterno: "López",       apMaterno: "Mendoza",   nombre: "Fernando",  grupo: "1F2" },
-      { id: 12, apPaterno: "Martínez",    apMaterno: "Morales",   nombre: "Laura",     grupo: "1F1" },
-      { id: 13, apPaterno: "Mendoza",     apMaterno: "Núñez",     nombre: "Jorge",     grupo: "6A2" },
-      { id: 14, apPaterno: "Morales",     apMaterno: "Ortega",    nombre: "Paola",     grupo: "6A1" },
-      { id: 15, apPaterno: "Núñez",       apMaterno: "Pérez",     nombre: "Diego",     grupo: "5B2" },
-      { id: 16, apPaterno: "Ortega",      apMaterno: "Ramírez",   nombre: "Claudia",   grupo: "5B1" },
-      { id: 17, apPaterno: "Pérez",       apMaterno: "Reyes",     nombre: "Eduardo",   grupo: "4C2" },
-      { id: 18, apPaterno: "Ramírez",     apMaterno: "Rivera",    nombre: "Natalia",   grupo: "4C1" },
-      { id: 19, apPaterno: "Reyes",       apMaterno: "Rodríguez", nombre: "Alejandro", grupo: "3D2" },
-      { id: 20, apPaterno: "Rivera",      apMaterno: "Ruiz",      nombre: "Isabel",    grupo: "3D1" },
-      { id: 21, apPaterno: "Rodríguez",   apMaterno: "Sánchez",   nombre: "Gabriel",   grupo: "2E2" },
-      { id: 22, apPaterno: "Ruiz",        apMaterno: "Torres",    nombre: "Mónica",    grupo: "2E1" },
-      { id: 23, apPaterno: "Sánchez",     apMaterno: "Vargas",    nombre: "Arturo",    grupo: "1F2" },
-      { id: 24, apPaterno: "Torres",      apMaterno: "Vega",      nombre: "Rebeca",    grupo: "1F1" },
-      { id: 25, apPaterno: "Vargas",      apMaterno: "Velázquez", nombre: "Hugo",      grupo: "6A2" },
-      { id: 26, apPaterno: "Velázquez",   apMaterno: "Aguilar",   nombre: "Carmen",    grupo: "6A1" },
-      { id: 27, apPaterno: "Aguilar",     apMaterno: "Alvarado",  nombre: "Javier",    grupo: "5B2" },
-      { id: 28, apPaterno: "Castillo",    apMaterno: "Bernal",    nombre: "Gabriela",  grupo: "5B1" },
-      { id: 29, apPaterno: "Delgado",     apMaterno: "Campos",    nombre: "Óscar",     grupo: "4C2" },
-      { id: 30, apPaterno: "Gutiérrez",   apMaterno: "Delgado",   nombre: "Patricia",  grupo: "4C1" },
-    ];
-    
-    // ---- REGISTROS DEL DÍA ----
-    // Se almacena en localStorage. Estructura:
-    // { alumnoId, fecha, asistencia: 'presente'|'retardo'|'falta', credencial: bool, uniforme: bool }
-    function getRegistros() {
-      try { return JSON.parse(localStorage.getItem('registros') || '[]'); } catch(e) { return []; }
-    }
-    
-    function setRegistros(arr) {
-      localStorage.setItem('registros', JSON.stringify(arr));
-    }
-    
-    function getHistorial() {
-      try { return JSON.parse(localStorage.getItem('historial') || '[]'); } catch(e) { return []; }
-    }
-    
-    function setHistorial(arr) {
-      localStorage.setItem('historial', JSON.stringify(arr));
-    }
-    
-    // Obtener registro de HOY para un alumno
-    function getRegistroHoy(alumnoId) {
-      return getRegistros().find(r => r.alumnoId === alumnoId && r.fecha === HOY) || null;
-    }
-    
-    // Guardar o actualizar registro del día
-    function guardarRegistro(alumnoId, asistencia, credencial, uniforme) {
-      let registros = getRegistros();
-      let historial = getHistorial();
-      const idx = registros.findIndex(r => r.alumnoId === alumnoId && r.fecha === HOY);
-      const reg = { alumnoId, fecha: HOY, asistencia, credencial, uniforme };
-    
-      if (idx >= 0) { registros[idx] = reg; }
-      else { registros.push(reg); }
-      setRegistros(registros);
-    
-      // También actualizar historial
-      const hidx = historial.findIndex(h => h.alumnoId === alumnoId && h.fecha === HOY);
-      if (hidx >= 0) { historial[hidx] = reg; }
-      else { historial.push(reg); }
-      setHistorial(historial);
-    }
-    
-    // Nombre completo de alumno
-    function nombreCompleto(a) {
-      return `${a.apPaterno} ${a.apMaterno}, ${a.nombre}`;
-    }
-    
-    // Ordenar alfabéticamente por apPaterno, apMaterno, nombre
-    function sortAlumnos(arr) {
-      return [...arr].sort((a, b) => {
-        const ka = `${a.apPaterno}${a.apMaterno}${a.nombre}`;
-        const kb = `${b.apPaterno}${b.apMaterno}${b.nombre}`;
-        return ka.localeCompare(kb, 'es');
-      });
-    }
-    
-    // Ordenar por semestre (grupo) desc (6→1) y terminación 2 antes 1
-    function sortPorSemestre(arr) {
-      const semNum = g => parseInt(g[0]);
-      const termNum = g => parseInt(g[g.length - 1]);
-      return [...arr].sort((a, b) => {
-        const sa = semNum(a.grupo), sb = semNum(b.grupo);
-        if (sb !== sa) return sb - sa;
-        return termNum(b.grupo) - termNum(a.grupo);
-      });
-    }
-    
-    // Inicializar datos demo para hoy (algunos alumnos ya registrados)
-    function initDemoData() {
-      if (getRegistros().length > 0) return; // ya hay datos
-      const demos = [
-        { id: 1, asistencia: 'presente', credencial: false, uniforme: true },
-        { id: 2, asistencia: 'presente', credencial: true,  uniforme: false },
-        { id: 3, asistencia: 'retardo',  credencial: true,  uniforme: true },
-        { id: 4, asistencia: 'presente', credencial: true,  uniforme: true },
-        { id: 5, asistencia: 'falta',    credencial: false, uniforme: false },
-        { id: 7, asistencia: 'presente', credencial: false, uniforme: false },
-        { id: 9, asistencia: 'presente', credencial: true,  uniforme: true },
-        { id: 11, asistencia: 'retardo', credencial: false, uniforme: true },
-        { id: 13, asistencia: 'presente', credencial: true, uniforme: true },
-        { id: 15, asistencia: 'presente', credencial: true, uniforme: false },
-        { id: 17, asistencia: 'presente', credencial: false, uniforme: true },
-        { id: 19, asistencia: 'falta',   credencial: false, uniforme: false },
-        { id: 21, asistencia: 'presente', credencial: true, uniforme: true },
-        { id: 25, asistencia: 'presente', credencial: true, uniforme: true },
-      ];
-      demos.forEach(d => guardarRegistro(d.id, d.asistencia, d.credencial, d.uniforme));
-    }
-    
-    function agregarAlumno(nombreCompleto, curp, numeroControl) {
-      const partes = nombreCompleto.trim().split(' ');
-    
-      const nombre = partes.pop() || '';
-      const apMaterno = partes.pop() || '';
-      const apPaterno = partes.join(' ') || '';
-    
-      const nuevoAlumno = {
-        id: Date.now(),
-        apPaterno,
-        apMaterno,
-        nombre,
-        grupo: 'N/A',
-        curp,
-        numeroControl
-      };
-    
-      ALUMNOS_BASE.push(nuevoAlumno);
-      guardarAlumnos();
-    }
-    
-    function eliminarAlumno(id) {
-      ALUMNOS_BASE = ALUMNOS_BASE.filter(a => a.id !== id);
-      guardarAlumnos();
-    
-      let registros = getRegistros().filter(r => r.alumnoId !== id);
-      setRegistros(registros);
-    
-      let historial = getHistorial().filter(h => h.alumnoId !== id);
-      setHistorial(historial);
-    }
-    
-    initDemoData();
-
     // ============================================================
     // APP.JS — Lógica principal del sistema de asistencia
     // ============================================================
@@ -1118,12 +1110,10 @@
           <button class="btn-historial" onclick="verHistorial(${a.id})">
             📜 Historial
           </button>
-    
-          <button class="btn-save" onclick="mostrarMasInfo(${a.id})">
+          <button class="btn-mas-info" onclick="mostrarMasInfo(${a.id})">
             ℹ️ Más info
           </button>
-    
-          <button class="btn-faltante" onclick="borrarAlumno(${a.id})">
+          <button class="btn-eliminar" onclick="borrarAlumno(${a.id})">
             🗑 Eliminar
           </button>
         </div>
@@ -1396,47 +1386,87 @@
       const alumno = ALUMNOS_BASE.find(a => a.id === alumnoId);
       if (!alumno) return;
     
-      const historial = getHistorial().filter(h => h.alumnoId === alumnoId);
+      const historial = getHistorial()
+        .filter(h => h.alumnoId === alumnoId)
+        .sort((a, b) => {
+          const fa = a.fecha.split('/').reverse().join('-');
+          const fb = b.fecha.split('/').reverse().join('-');
+          return fb.localeCompare(fa);
+        });
     
-      const asistencias = historial.filter(h => h.asistencia === 'presente' || h.asistencia === 'retardo').length;
-      const faltas = historial.filter(h => h.asistencia === 'falta').length;
+      const totalAsist   = historial.filter(h => h.asistencia === 'presente').length;
+      const totalRetardo = historial.filter(h => h.asistencia === 'retardo').length;
+      const totalFaltas  = historial.filter(h => h.asistencia === 'falta').length;
+      const total        = historial.length;
     
-      document.getElementById('modalTitle').textContent = 'ℹ️ Información del Alumno';
+      document.getElementById('modalTitle').textContent = `ℹ️ Perfil — ${nombreCompleto(alumno)}`;
+    
+      const filasHistorial = historial.length === 0
+        ? `<tr><td colspan="4" style="text-align:center;color:#90A4AE;padding:18px;">Sin registros previos</td></tr>`
+        : historial.map(h => `
+            <tr>
+              <td>📅 ${h.fecha}</td>
+              <td>${badgeAsistenciaText(h.asistencia)}</td>
+              <td>${h.credencial ? '✅ Sí' : '❌ No'}</td>
+              <td>${h.uniforme  ? '✅ Sí' : '❌ No'}</td>
+            </tr>`).join('');
     
       document.getElementById('modalBody').innerHTML = `
-        <div style="display:flex;flex-direction:column;gap:12px;">
-          <div><strong>Nombre completo:</strong> ${nombreCompleto(alumno)}</div>
-          <div><strong>CURP:</strong> ${alumno.curp || 'No registrada'}</div>
-          <div><strong>Número de control:</strong> ${alumno.numeroControl || 'No registrado'}</div>
-          <div><strong>Total asistencias:</strong> ${asistencias}</div>
-          <div><strong>Total faltas:</strong> ${faltas}</div>
+        <div class="info-perfil-grid">
+          <div class="info-dato">
+            <span class="info-label">Apellido Paterno</span>
+            <span class="info-valor">${alumno.apPaterno}</span>
+          </div>
+          <div class="info-dato">
+            <span class="info-label">Apellido Materno</span>
+            <span class="info-valor">${alumno.apMaterno}</span>
+          </div>
+          <div class="info-dato">
+            <span class="info-label">Nombre(s)</span>
+            <span class="info-valor">${alumno.nombre}</span>
+          </div>
+          <div class="info-dato">
+            <span class="info-label">Grupo</span>
+            <span class="info-valor">${alumno.grupo}</span>
+          </div>
+          <div class="info-dato">
+            <span class="info-label">CURP</span>
+            <span class="info-valor">${alumno.curp || '<em style="color:#90A4AE">No registrada</em>'}</span>
+          </div>
+          <div class="info-dato">
+            <span class="info-label">Núm. de Control</span>
+            <span class="info-valor">${alumno.numeroControl || '<em style="color:#90A4AE">No registrado</em>'}</span>
+          </div>
         </div>
     
-        <hr style="margin:20px 0;">
+        <div class="info-stats-row">
+          <div class="info-stat info-stat-ok">
+            <span class="info-stat-num">${totalAsist}</span>
+            <span class="info-stat-lbl">✓ Presentes</span>
+          </div>
+          <div class="info-stat info-stat-warn">
+            <span class="info-stat-num">${totalRetardo}</span>
+            <span class="info-stat-lbl">⏰ Retardos</span>
+          </div>
+          <div class="info-stat info-stat-danger">
+            <span class="info-stat-num">${totalFaltas}</span>
+            <span class="info-stat-lbl">✗ Faltas</span>
+          </div>
+          <div class="info-stat info-stat-neutral">
+            <span class="info-stat-num">${total}</span>
+            <span class="info-stat-lbl">📋 Total días</span>
+          </div>
+        </div>
     
-        <h4>📜 Historial de asistencias</h4>
-    
+        <h4 style="margin:18px 0 10px;font-family:'Rajdhani',sans-serif;color:#1565C0;font-size:1.05rem;letter-spacing:.5px;">
+          📜 Historial de asistencias
+        </h4>
         <table class="historial-table">
-          <thead>
-            <tr>
-              <th>Fecha</th>
-              <th>Asistencia</th>
-              <th>Credencial</th>
-              <th>Uniforme</th>
-            </tr>
-          </thead>
-          <tbody>
-            ${historial.map(h => `
-              <tr>
-                <td>${h.fecha}</td>
-                <td>${badgeAsistenciaText(h.asistencia)}</td>
-                <td>${h.credencial ? '✅ Sí' : '❌ No'}</td>
-                <td>${h.uniforme ? '✅ Sí' : '❌ No'}</td>
-              </tr>
-            `).join('')}
-          </tbody>
-        </table>
-      `;
+          <thead><tr>
+            <th>Fecha</th><th>Asistencia</th><th>Credencial</th><th>Uniforme</th>
+          </tr></thead>
+          <tbody>${filasHistorial}</tbody>
+        </table>`;
     
       document.getElementById('modalHistorial').classList.add('open');
     }
@@ -1450,25 +1480,26 @@
     }
     
     function guardarNuevoAlumno() {
-      const nombre = document.getElementById('nuevoNombre').value.trim();
-      const curp = document.getElementById('nuevoCurp').value.trim();
-      const control = document.getElementById('nuevoControl').value.trim();
+      const apPaterno   = document.getElementById('nuevoApPaterno').value.trim();
+      const apMaterno   = document.getElementById('nuevoApMaterno').value.trim();
+      const nombre      = document.getElementById('nuevoNombre').value.trim();
+      const grupo       = document.getElementById('nuevoGrupo').value.trim();
+      const curp        = document.getElementById('nuevoCurp').value.trim().toUpperCase();
+      const control     = document.getElementById('nuevoControl').value.trim();
     
-      if (!nombre || !curp || !control) {
-        showToast('⚠️ Completa todos los campos');
+      if (!apPaterno || !apMaterno || !nombre) {
+        showToast('⚠️ Completa al menos apellidos y nombre');
         return;
       }
     
-      agregarAlumno(nombre, curp, control);
-    
+      agregarAlumno(apPaterno, apMaterno, nombre, grupo, curp, control);
       cerrarModalAlumno();
     
-      document.getElementById('nuevoNombre').value = '';
-      document.getElementById('nuevoCurp').value = '';
-      document.getElementById('nuevoControl').value = '';
+      // Limpiar campos
+      ['nuevoApPaterno','nuevoApMaterno','nuevoNombre','nuevoGrupo','nuevoCurp','nuevoControl']
+        .forEach(id => document.getElementById(id).value = '');
     
       showToast('✅ Alumno agregado correctamente');
-    
       showPanel('todosRegistrados');
     }
     
@@ -1486,6 +1517,183 @@
     
       showPanel(currentPanel || 'todosRegistrados');
     }
+    // ============================================================
+    // DATA.JS — Base de datos de alumnos y asistencias
+    // ============================================================
+    
+    // Fecha actual para registros del día
+    const HOY = new Date().toLocaleDateString('es-MX', { day: '2-digit', month: '2-digit', year: 'numeric' });
+    
+    // ---- CATÁLOGO DE ALUMNOS ----
+    // Formato: { id, apPaterno, apMaterno, nombre, grupo }
+    // Grupos: 6A2, 6A1, 5B2, 5B1, 4C2, 4C1, 3D2, 3D1, 2E2, 2E1, 1F2, 1F1
+    let ALUMNOS_BASE = [
+      { id: 1,  apPaterno: "Alvarado",    apMaterno: "Benítez",   nombre: "Carlos",    grupo: "6A2" },
+      { id: 2,  apPaterno: "Bernal",      apMaterno: "Cruz",      nombre: "Sofía",     grupo: "6A1" },
+      { id: 3,  apPaterno: "Campos",      apMaterno: "Díaz",      nombre: "Andrés",    grupo: "5B2" },
+      { id: 4,  apPaterno: "Domínguez",   apMaterno: "Espinosa",  nombre: "Valeria",   grupo: "5B1" },
+      { id: 5,  apPaterno: "Estrada",     apMaterno: "Flores",    nombre: "Miguel",    grupo: "4C2" },
+      { id: 6,  apPaterno: "Fuentes",     apMaterno: "García",    nombre: "Daniela",   grupo: "4C1" },
+      { id: 7,  apPaterno: "García",      apMaterno: "Hernández", nombre: "Luis",      grupo: "3D2" },
+      { id: 8,  apPaterno: "Hernández",   apMaterno: "Jiménez",   nombre: "Mariana",   grupo: "3D1" },
+      { id: 9,  apPaterno: "Ibarra",      apMaterno: "López",     nombre: "Rodrigo",   grupo: "2E2" },
+      { id: 10, apPaterno: "Jiménez",     apMaterno: "Martínez",  nombre: "Ana",       grupo: "2E1" },
+      { id: 11, apPaterno: "López",       apMaterno: "Mendoza",   nombre: "Fernando",  grupo: "1F2" },
+      { id: 12, apPaterno: "Martínez",    apMaterno: "Morales",   nombre: "Laura",     grupo: "1F1" },
+      { id: 13, apPaterno: "Mendoza",     apMaterno: "Núñez",     nombre: "Jorge",     grupo: "6A2" },
+      { id: 14, apPaterno: "Morales",     apMaterno: "Ortega",    nombre: "Paola",     grupo: "6A1" },
+      { id: 15, apPaterno: "Núñez",       apMaterno: "Pérez",     nombre: "Diego",     grupo: "5B2" },
+      { id: 16, apPaterno: "Ortega",      apMaterno: "Ramírez",   nombre: "Claudia",   grupo: "5B1" },
+      { id: 17, apPaterno: "Pérez",       apMaterno: "Reyes",     nombre: "Eduardo",   grupo: "4C2" },
+      { id: 18, apPaterno: "Ramírez",     apMaterno: "Rivera",    nombre: "Natalia",   grupo: "4C1" },
+      { id: 19, apPaterno: "Reyes",       apMaterno: "Rodríguez", nombre: "Alejandro", grupo: "3D2" },
+      { id: 20, apPaterno: "Rivera",      apMaterno: "Ruiz",      nombre: "Isabel",    grupo: "3D1" },
+      { id: 21, apPaterno: "Rodríguez",   apMaterno: "Sánchez",   nombre: "Gabriel",   grupo: "2E2" },
+      { id: 22, apPaterno: "Ruiz",        apMaterno: "Torres",    nombre: "Mónica",    grupo: "2E1" },
+      { id: 23, apPaterno: "Sánchez",     apMaterno: "Vargas",    nombre: "Arturo",    grupo: "1F2" },
+      { id: 24, apPaterno: "Torres",      apMaterno: "Vega",      nombre: "Rebeca",    grupo: "1F1" },
+      { id: 25, apPaterno: "Vargas",      apMaterno: "Velázquez", nombre: "Hugo",      grupo: "6A2" },
+      { id: 26, apPaterno: "Velázquez",   apMaterno: "Aguilar",   nombre: "Carmen",    grupo: "6A1" },
+      { id: 27, apPaterno: "Aguilar",     apMaterno: "Alvarado",  nombre: "Javier",    grupo: "5B2" },
+      { id: 28, apPaterno: "Castillo",    apMaterno: "Bernal",    nombre: "Gabriela",  grupo: "5B1" },
+      { id: 29, apPaterno: "Delgado",     apMaterno: "Campos",    nombre: "Óscar",     grupo: "4C2" },
+      { id: 30, apPaterno: "Gutiérrez",   apMaterno: "Delgado",   nombre: "Patricia",  grupo: "4C1" },
+    ];
+    
+    // ---- REGISTROS DEL DÍA ----
+    // Se almacena en localStorage. Estructura:
+    // { alumnoId, fecha, asistencia: 'presente'|'retardo'|'falta', credencial: bool, uniforme: bool }
+    function getRegistros() {
+      try { return JSON.parse(localStorage.getItem('registros') || '[]'); } catch(e) { return []; }
+    }
+    
+    function setRegistros(arr) {
+      localStorage.setItem('registros', JSON.stringify(arr));
+    }
+    
+    function getHistorial() {
+      try { return JSON.parse(localStorage.getItem('historial') || '[]'); } catch(e) { return []; }
+    }
+    
+    function setHistorial(arr) {
+      localStorage.setItem('historial', JSON.stringify(arr));
+    }
+    
+    // Obtener registro de HOY para un alumno
+    function getRegistroHoy(alumnoId) {
+      return getRegistros().find(r => r.alumnoId === alumnoId && r.fecha === HOY) || null;
+    }
+    
+    // Guardar o actualizar registro del día
+    function guardarRegistro(alumnoId, asistencia, credencial, uniforme) {
+      let registros = getRegistros();
+      let historial = getHistorial();
+      const idx = registros.findIndex(r => r.alumnoId === alumnoId && r.fecha === HOY);
+      const reg = { alumnoId, fecha: HOY, asistencia, credencial, uniforme };
+    
+      if (idx >= 0) { registros[idx] = reg; }
+      else { registros.push(reg); }
+      setRegistros(registros);
+    
+      // También actualizar historial
+      const hidx = historial.findIndex(h => h.alumnoId === alumnoId && h.fecha === HOY);
+      if (hidx >= 0) { historial[hidx] = reg; }
+      else { historial.push(reg); }
+      setHistorial(historial);
+    }
+    
+    // Nombre completo de alumno
+    function nombreCompleto(a) {
+      return `${a.apPaterno} ${a.apMaterno}, ${a.nombre}`;
+    }
+    
+    // Ordenar alfabéticamente por apPaterno, apMaterno, nombre
+    function sortAlumnos(arr) {
+      return [...arr].sort((a, b) => {
+        const ka = `${a.apPaterno}${a.apMaterno}${a.nombre}`;
+        const kb = `${b.apPaterno}${b.apMaterno}${b.nombre}`;
+        return ka.localeCompare(kb, 'es');
+      });
+    }
+    
+    // Ordenar por semestre (grupo) desc (6→1) y terminación 2 antes 1
+    function sortPorSemestre(arr) {
+      const semNum = g => parseInt(g[0]);
+      const termNum = g => parseInt(g[g.length - 1]);
+      return [...arr].sort((a, b) => {
+        const sa = semNum(a.grupo), sb = semNum(b.grupo);
+        if (sb !== sa) return sb - sa;
+        return termNum(b.grupo) - termNum(a.grupo);
+      });
+    }
+    
+    // Inicializar datos demo para hoy (algunos alumnos ya registrados)
+    function initDemoData() {
+      if (getRegistros().length > 0) return; // ya hay datos
+      const demos = [
+        { id: 1, asistencia: 'presente', credencial: false, uniforme: true },
+        { id: 2, asistencia: 'presente', credencial: true,  uniforme: false },
+        { id: 3, asistencia: 'retardo',  credencial: true,  uniforme: true },
+        { id: 4, asistencia: 'presente', credencial: true,  uniforme: true },
+        { id: 5, asistencia: 'falta',    credencial: false, uniforme: false },
+        { id: 7, asistencia: 'presente', credencial: false, uniforme: false },
+        { id: 9, asistencia: 'presente', credencial: true,  uniforme: true },
+        { id: 11, asistencia: 'retardo', credencial: false, uniforme: true },
+        { id: 13, asistencia: 'presente', credencial: true, uniforme: true },
+        { id: 15, asistencia: 'presente', credencial: true, uniforme: false },
+        { id: 17, asistencia: 'presente', credencial: false, uniforme: true },
+        { id: 19, asistencia: 'falta',   credencial: false, uniforme: false },
+        { id: 21, asistencia: 'presente', credencial: true, uniforme: true },
+        { id: 25, asistencia: 'presente', credencial: true, uniforme: true },
+      ];
+      demos.forEach(d => guardarRegistro(d.id, d.asistencia, d.credencial, d.uniforme));
+    }
+    
+    // ---- PERSISTENCIA DE ALUMNOS EN LOCALSTORAGE ----
+    function guardarAlumnos() {
+      localStorage.setItem('alumnos_base', JSON.stringify(ALUMNOS_BASE));
+    }
+    
+    function cargarAlumnos() {
+      try {
+        const guardados = JSON.parse(localStorage.getItem('alumnos_base') || 'null');
+        if (guardados && guardados.length > 0) {
+          ALUMNOS_BASE.length = 0;
+          guardados.forEach(a => ALUMNOS_BASE.push(a));
+        }
+      } catch(e) { /* usar datos por defecto */ }
+    }
+    
+    function agregarAlumno(apPaterno, apMaterno, nombre, grupo, curp, numeroControl) {
+      const nuevoAlumno = {
+        id: Date.now(),
+        apPaterno: apPaterno.trim(),
+        apMaterno: apMaterno.trim(),
+        nombre: nombre.trim(),
+        grupo: grupo.trim() || 'N/A',
+        curp: curp.trim(),
+        numeroControl: numeroControl.trim()
+      };
+      ALUMNOS_BASE.push(nuevoAlumno);
+      guardarAlumnos();
+      return nuevoAlumno;
+    }
+    
+    function eliminarAlumno(id) {
+      const idx = ALUMNOS_BASE.findIndex(a => a.id === id);
+      if (idx !== -1) ALUMNOS_BASE.splice(idx, 1);
+      guardarAlumnos();
+    
+      let registros = getRegistros().filter(r => r.alumnoId !== id);
+      setRegistros(registros);
+    
+      let historial = getHistorial().filter(h => h.alumnoId !== id);
+      setHistorial(historial);
+    }
+    
+    // Cargar alumnos persistidos antes de inicializar demo
+    cargarAlumnos();
+    initDemoData();
   </script>
 </body>
 </html>
